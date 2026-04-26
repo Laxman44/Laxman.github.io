@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name — Portfolio</title>
+  <title>Laxman — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --bg:       #0a0a0a;
       --surface:  #111111;
@@ -18,9 +17,7 @@
       --accent:   #c8a96e;
       --accent2:  #7eb8a4;
     }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -29,8 +26,6 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-
-    /* ── NOISE TEXTURE OVERLAY ── */
     body::before {
       content: '';
       position: fixed;
@@ -40,8 +35,6 @@
       z-index: 999;
       opacity: 0.4;
     }
-
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -50,18 +43,16 @@
       justify-content: space-between;
       align-items: center;
       padding: 1.4rem 2.5rem;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.4s, backdrop-filter 0.4s, background 0.4s;
+      transition: all 0.4s;
     }
     nav.scrolled {
-      border-color: var(--border);
+      border-bottom: 1px solid var(--border);
       backdrop-filter: blur(20px);
       background: rgba(10,10,10,0.85);
     }
     .logo {
       font-family: 'Playfair Display', serif;
       font-size: 1.15rem;
-      letter-spacing: 0.02em;
       color: var(--accent);
       text-decoration: none;
     }
@@ -72,518 +63,167 @@
       font-size: 0.8rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--text); }
-
-    /* ── HERO ── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 2.5rem 6rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 70% 30%, rgba(200,169,110,0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(126,184,164,0.05) 0%, transparent 50%);
-    }
-
-    .hero-line {
-      position: absolute;
-      top: 0; right: 14%;
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(to bottom, transparent 0%, var(--border) 30%, var(--border) 70%, transparent 100%);
-      opacity: 0.5;
-    }
-
-    .hero-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.2s forwards;
-    }
-
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 9vw, 7.5rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      font-weight: 400;
-      max-width: 900px;
-      opacity: 0;
-      animation: fadeUp 0.9s 0.4s forwards;
-    }
-
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .hero-sub {
-      margin-top: 2rem;
-      font-size: 1rem;
-      color: var(--muted);
-      max-width: 480px;
-      opacity: 0;
-      animation: fadeUp 0.9s 0.6s forwards;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      margin-top: 3rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.9s 0.8s forwards;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 1.8rem;
-      border-radius: 3px;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      font-family: 'DM Sans', sans-serif;
-      transition: all 0.25s;
-      cursor: pointer;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #0a0a0a;
-      font-weight: 500;
-    }
-    .btn-primary:hover { background: #d4b87a; transform: translateY(-2px); }
-    .btn-outline {
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2.5rem; right: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--muted);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0;
-      animation: fadeUp 1s 1.2s forwards;
-    }
-    .scroll-line {
-      width: 1px;
-      height: 50px;
-      background: linear-gradient(to bottom, var(--accent), transparent);
-      animation: scrollPulse 2s 1.5s infinite;
-    }
-
-    /* ── SECTIONS ── */
-    section { padding: 7rem 2.5rem; }
+    section { padding: 7rem 2.5rem; scroll-margin-top: 80px; }
     .section-label {
       font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 3rem;
+      margin-bottom: 2rem;
       display: flex;
       align-items: center;
       gap: 1rem;
     }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      max-width: 60px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.4;
-    }
-    h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 400;
-      line-height: 1.15;
-      margin-bottom: 1.5rem;
-    }
-
-    /* ── ABOUT ── */
-    #about { border-top: 1px solid var(--border); }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-      margin-top: 3rem;
-    }
-    .about-text p {
-      color: var(--muted);
-      margin-bottom: 1.2rem;
-      font-size: 1.05rem;
-    }
-    .about-text p strong { color: var(--text); font-weight: 500; }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-    .stat {
-      background: var(--bg);
-      padding: 2rem;
-    }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      color: var(--accent);
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-    .stat-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    /* ── SKILLS ── */
-    #skills { border-top: 1px solid var(--border); background: var(--surface); }
-    .skills-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-top: 3rem;
-    }
-    .skill-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.4rem 0;
-      border-bottom: 1px solid var(--border);
-      transition: padding-left 0.3s;
-    }
-    .skill-row:hover { padding-left: 1rem; }
-    .skill-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-style: italic;
-    }
-    .skill-tags {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-    .tag {
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.7rem;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 2px;
-    }
-
-    /* ── PROJECTS ── */
-    #projects { border-top: 1px solid var(--border); }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      margin-top: 3rem;
-    }
-    .project-card {
-      background: var(--bg);
-      padding: 2.5rem;
-      transition: background 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s;
-    }
-    .project-card:hover::before { transform: scaleX(1); }
-    .project-card:hover { background: var(--surface); }
-    .project-num {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-    .project-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      margin-bottom: 0.8rem;
-      font-weight: 400;
-    }
-    .project-desc {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-    }
-    .project-link {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: gap 0.2s;
-    }
-    .project-link:hover { gap: 0.8rem; }
-
-    /* ── CONTACT ── */
-    #contact {
-      border-top: 1px solid var(--border);
+    h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1.5rem; font-weight: 400; }
+    
+    /* TOOL STYLING */
+    .tool-card {
       background: var(--surface);
-      text-align: center;
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      max-width: 700px;
+      margin: 0 auto;
     }
-    #contact h2 { margin-bottom: 0.8rem; }
-    #contact p { color: var(--muted); max-width: 450px; margin: 0 auto 3rem; }
-    .contact-links {
-      display: flex;
+    input, select, textarea {
+      width: 100%;
+      padding: 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+    .btn {
+      display: inline-flex;
+      padding: 0.85rem 1.8rem;
+      background: var(--accent);
+      color: #0a0a0a;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      width: 100%;
       justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
     }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 2rem 2.5rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--muted);
-      font-size: 0.75rem;
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
-      50%       { opacity: 1;   transform: scaleY(1.1); }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── MOBILE ── */
-    @media (max-width: 700px) {
-      nav { padding: 1.2rem 1.5rem; }
-      .nav-links { display: none; }
-      #hero { padding: 0 1.5rem 5rem; }
-      section { padding: 5rem 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
-    }
+    .status-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+    .status-table th { text-align: left; color: var(--muted); font-size: 0.7rem; text-transform: uppercase; padding: 10px; border-bottom: 1px solid var(--border); }
+    .status-table td { padding: 12px 10px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    
+    @media (max-width: 700px) { section { padding: 4rem 1.5rem; } .nav-links { display: none; } }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="navbar">
-  <a class="logo" href="#">YourName.</a>
+  <a class="logo" href="#">Laxman.</a>
   <ul class="nav-links">
+    <li><a href="#checker">IPO Checker</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-line"></div>
+<section id="hero" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+  <p class="section-label">Developer & Designer</p>
+  <h1 style="font-family:'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6rem);">Bulk IPO <br><em>Result Checker</em></h1>
+  <p style="color:var(--muted); max-width: 500px; margin-top: 1rem;">A specialized tool for the Nepal Stock Market. Check multiple BOIDs instantly through the official CDSC portal.</p>
+</section>
 
-  <p class="hero-tag">👋 Welcome — Available for work</p>
-  <h1>Your <em>Name</em><br>Here</h1>
-  <p class="hero-sub">I build things for the web. Developer · Designer · Creator based in Kathmandu, Nepal.</p>
+<section id="checker">
+  <div class="section-label">01 — The Tool</div>
+  <div class="tool-card">
+    <label style="font-size: 0.7rem; color: var(--accent);">SELECT COMPANY</label>
+    <select id="companySelect">
+      <option value="">Fetching active companies...</option>
+    </select>
 
-  <div class="hero-cta">
-    <a href="#projects" class="btn btn-primary">View My Work →</a>
-    <a href="#contact" class="btn btn-outline">Get In Touch</a>
-  </div>
+    <label style="font-size: 0.7rem; color: var(--accent);">ENTER BOIDs (ONE PER LINE)</label>
+    <textarea id="boidList" rows="8" placeholder="1301230000...&#10;1304560000..."></textarea>
 
-  <div class="scroll-hint">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
+    <button class="btn" onclick="startBulkCheck()" id="checkBtn">Check Allotment Status</button>
+
+    <div id="resultsArea"></div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">01 — About Me</div>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <h2>A little about <em style="font-family:'Playfair Display',serif;font-style:italic">who I am</em></h2>
-      <p>Hi! I'm <strong>Your Name</strong>, a passionate developer from Nepal. I love building useful things for the internet — from small tools to full applications.</p>
-      <p>I built a <strong>Nepal IPO result checker</strong> that lets you check bulk allotment status using just your BOID number through the official CDSC portal.</p>
-      <p>When I'm not coding, I'm probably exploring the stock market, hiking, or learning something new.</p>
-    </div>
-    <div class="stats-grid reveal">
-      <div class="stat">
-        <div class="stat-num">3+</div>
-        <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">20+</div>
-        <div class="stat-label">Projects Built</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Passion</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">🇳🇵</div>
-        <div class="stat-label">Based in Nepal</div>
-      </div>
-    </div>
-  </div>
+<section id="about" style="border-top: 1px solid var(--border);">
+  <div class="section-label">02 — About</div>
+  <h2>Built for <em>efficiency</em></h2>
+  <p style="color: var(--muted); max-width: 600px;">This tool was developed to bypass the tedious manual entry process of the official portal. It uses JavaScript to asynchronously fetch data for multiple accounts at once. Built in Nepal for Nepali investors.</p>
 </section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">02 — Skills</div>
-  <h2 class="reveal">What I work with</h2>
-  <div class="skills-list">
-    <div class="skill-row reveal">
-      <span class="skill-name">Python</span>
-      <div class="skill-tags">
-        <span class="tag">Automation</span>
-        <span class="tag">APIs</span>
-        <span class="tag">Data</span>
-      </div>
-    </div>
-    <div class="skill-row reveal">
-      <span class="skill-name">Web Development</span>
-      <div class="skill-tags">
-        <span class="tag">HTML</span>
-        <span class="tag">CSS</span>
-        <span class="tag">JavaScript</span>
-      </div>
-    </div>
-    <div class="skill-row reveal">
-      <span class="skill-name">Nepal Stock Market</span>
-      <div class="skill-tags">
-        <span class="tag">NEPSE</span>
-        <span class="tag">IPO</span>
-        <span class="tag">CDSC</span>
-      </div>
-    </div>
-    <div class="skill-row reveal">
-      <span class="skill-name">Tools & Platforms</span>
-      <div class="skill-tags">
-        <span class="tag">GitHub</span>
-        <span class="tag">VS Code</span>
-        <span class="tag">Linux</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">03 — Projects</div>
-  <h2 class="reveal">Things I've built</h2>
-  <div class="projects-grid">
-    <div class="project-card reveal">
-      <div class="project-num">Project 01</div>
-      <div class="project-title">Nepal IPO Bulk Checker</div>
-      <p class="project-desc">A Python tool that checks IPO allotment results for multiple BOIDs at once using the official CDSC portal (iporesult.cdsc.com.np). No manual checking needed.</p>
-      <a href="#" class="project-link">View Project →</a>
-    </div>
-    <div class="project-card reveal">
-      <div class="project-num">Project 02</div>
-      <div class="project-title">Your Second Project</div>
-      <p class="project-desc">Describe your second project here. What problem does it solve? What technologies did you use? Keep it short and clear.</p>
-      <a href="#" class="project-link">View Project →</a>
-    </div>
-    <div class="project-card reveal">
-      <div class="project-num">Project 03</div>
-      <div class="project-title">Your Third Project</div>
-      <p class="project-desc">Describe your third project here. What did you learn building it? Who is it for? Add a link to GitHub or a live demo below.</p>
-      <a href="#" class="project-link">View Project →</a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label" style="justify-content:center">04 — Contact</div>
-  <h2 class="reveal">Let's work together</h2>
-  <p class="reveal">Have a project in mind or just want to say hello? My inbox is always open.</p>
-  <div class="contact-links reveal">
-    <a href="mailto:your@email.com" class="btn btn-primary">✉ Email Me</a>
-    <a href="https://github.com/yourusername" target="_blank" class="btn btn-outline">GitHub</a>
-    <a href="https://linkedin.com/in/yourusername" target="_blank" class="btn btn-outline">LinkedIn</a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span>© 2026 Your Name. All rights reserved.</span>
-  <span>Built with ❤️ in Nepal 🇳🇵</span>
-</footer>
 
 <script>
-  // Nav scroll effect
-  const nav = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 50);
-  });
+  // 1. SETTINGS & PROXIES
+  // We use a CORS proxy because browsers block direct requests to CDSC from other websites.
+  const PROXY = "https://corsproxy.io/?"; 
+  const API_URL = "https://iporesult.cdsc.com.np/api/details";
+  const COMPANY_URL = "https://iporesult.cdsc.com.np/api/companyshare/featchCompanyName";
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+  // 2. FETCH COMPANIES
+  async function loadCompanies() {
+    try {
+      const response = await fetch(PROXY + encodeURIComponent(COMPANY_URL));
+      const data = await response.json();
+      const select = document.getElementById('companySelect');
+      if(data.body) {
+        select.innerHTML = data.body.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
       }
-    });
-  }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
+    } catch (e) {
+      document.getElementById('companySelect').innerHTML = '<option>Error loading companies. Refresh?</option>';
+    }
+  }
+  loadCompanies();
+
+  // 3. CHECK LOGIC
+  async function startBulkCheck() {
+    const btn = document.getElementById('checkBtn');
+    const boidInput = document.getElementById('boidList').value;
+    const companyId = document.getElementById('companySelect').value;
+    const resultsArea = document.getElementById('resultsArea');
+
+    const boids = boidInput.split('\n').map(b => b.trim()).filter(b => b.length === 16);
+
+    if (!companyId) return alert("Please select a company first.");
+    if (boids.length === 0) return alert("Enter valid 16-digit BOIDs.");
+
+    btn.disabled = true;
+    btn.innerText = "Processing...";
+    resultsArea.innerHTML = `<table class="status-table" id="resTable"><tr><th>BOID</th><th>STATUS</th></tr></table>`;
+    
+    const table = document.getElementById('resTable');
+
+    for (const boid of boids) {
+        try {
+            const response = await fetch(PROXY + encodeURIComponent(API_URL), {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ companyShareId: companyId, boid: boid })
+            });
+            const res = await response.json();
+            
+            const row = table.insertRow();
+            const color = res.success ? "#7eb8a4" : "#666";
+            row.innerHTML = `<td>${boid}</td><td style="color:${color}; text-align:right;">${res.message}</td>`;
+        } catch (err) {
+            const row = table.insertRow();
+            row.innerHTML = `<td>${boid}</td><td style="color:red; text-align:right;">Request Failed</td>`;
+        }
+        // Short delay to prevent being flagged as a bot
+        await new Promise(r => setTimeout(r, 600));
+    }
+
+    btn.disabled = false;
+    btn.innerText = "Check Allotment Status";
+  }
+
+  // Nav Scroll Effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+  });
 </script>
+
 </body>
 </html>
